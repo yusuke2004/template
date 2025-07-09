@@ -1,0 +1,18 @@
+<%= form_with model: @calculation, local: true do |f| %>
+  <%= f.label :date %>
+  <%= f.date_field :date %>
+
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+
+  <%= f.label :calculation_type, "種別" %>
+  <%= f.select :calculation_type, [["収入", "income"], ["支出", "expense"]] %>
+
+  <%= f.label :category_id, "カテゴリ" %>
+  <%= f.collection_select :category_id, Category.all, :id, :name, prompt: "選択してください" %>
+
+  <%= f.label :note %>
+  <%= f.text_area :note %>
+
+  <%= f.submit "更新する" %>
+<% end %>

@@ -1,0 +1,17 @@
+<h3>投稿一覧（ページネーション有り）</h3>
+<%= page_entries_info @posts %>
+<%= paginate @posts %>
+<div class="posts-container">
+  <% @posts.each do |t| %>
+    <div class="post">
+      <%= t.user.email %>
+      <%= t.name %>
+      <%= t.sex %>
+      <%= t.number %>
+      <%= t.date %>
+      <%= t.body %>
+      <%= link_to "詳細へ", post_path(t.id) %>
+    </div>
+  <% end %>
+</div>
+<%= link_to "一覧に戻る", posts_path %>

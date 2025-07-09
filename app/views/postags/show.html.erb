@@ -1,0 +1,14 @@
+<h1>GeekTwitter</h1>
+<h3>postag詳細</h3>
+
+<% @postag.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+<% end %>
+
+<div class="postag">
+    <p><%= @postag.name %></p>
+    <p><%= @postag.body %></p>
+    <p><%= link_to "編集する", edit_postag_path(@postag.id) %></p>
+    <p><%= button_to "削除する", postag_path(@postag.id), method: :delete %></p>
+</div>
+<%= link_to "一覧に戻る", postags_path %>

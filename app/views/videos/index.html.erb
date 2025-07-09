@@ -1,0 +1,14 @@
+<%= link_to "新規投稿へ", new_video_path, class: "btn" %>
+
+<div class="videos-container">
+    <% @videos.each do |t| %>
+        <div class="video">
+            <%=  video_tag t.video_url ,:controls => true if t.video?%>
+            <%= t.body %>
+            <%= t.created_at %>
+            <%= link_to "詳細へ", video_path(t.id) %>
+            <%= link_to "編集する", edit_video_path(t.id) %>
+            <%= link_to "削除する", video_path(t.id), method: :delete %>
+        </div>
+    <% end %>
+</div>

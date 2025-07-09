@@ -1,0 +1,10 @@
+<h1>GeekTwitter</h1>
+<h3>video詳細</h3>
+
+<div class="video">
+    <p><%= @video.video %></p>
+    <p><%= @video.body %></p>
+    <p><%= link_to "編集する", edit_video_path(@video.id) %></p>
+    <p><%= button_to "削除する", video_path(@video.id), method: :delete %></p>
+</div>
+<%= link_to "一覧に戻る", videos_path %>

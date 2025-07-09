@@ -1,0 +1,58 @@
+<h1>GeekTwitter</h1>
+<h3>Post詳細</h3>
+<div class="post">
+    <p><%= @post.user.email %></p>
+    <p><%= image_tag url_for(@post.image), size: "250x200" if @post.image.attached? %></p>
+    <p><%= @post.name %></p>
+    <p><%= @post.sex %></p>
+    <p><%= @post.number %></p>
+    <p><%= @post.date %></p>
+    <p><%= @post.body %></p>
+    <p><%= @post.created_at %></p>
+
+    <% if user_signed_in? %>
+        <% if current_user.already_liked?(@post) %>
+            <%= link_to post_like_path(id: @post.id, post_id: @post.id), class: "like-link", data: { turbo_method: :delete } do %>
+                <i class="fa-solid fa-thumbs-up"></i>&nbsp;<%= @post.likes.count %>
+            <% end %>
+        <% else %>
+            <%= link_to post_likes_path(id: @post.id, post_id: @post.id), class: "like-link", data: { turbo_method: :post }  do %>
+                <i class="fa-regular fa-thumbs-up"></i>&nbsp;<%= @post.likes.count %>
+            <% end %>
+        <% end %>
+    <% else %>
+        <i class="fa-regular fa-thumbs-up"></i>&nbsp;<%= @post.likes.count %>
+    <% end %>
+
+    <% if user_signed_in? && current_user.id == @post.user_id %>
+        <p><%= link_to "編集する", edit_post_path(@post.id) %></p>
+        <p><%= button_to "削除する", post_path(@post.id), method: :delete %></p>
+    <% end %>
+</div>
+
+<div class="comment-wrapper">
+    <% if user_signed_in? %>
+        <%= form_with(model: [@post, @comment], local: true) do |f| %>
+            <%= f.text_area :content %>
+            <%= button_tag type: "submit" do %>
+                <i class="far fa-comments"></i> コメントする
+            <% end %>
+        <% end %>
+    <% end %>
+
+    <p>コメント一覧</p>
+    <% @comments.each do |c| %>
+        <hr>
+        <div>
+            <strong><%= c.user.email %></strong><br>
+            <%= c.content %>
+        </div>
+
+        <% if c.user == current_user %>
+            <%= link_to "編集", edit_post_comment_path(@post, c) %>
+            <%= button_to "削除", post_comment_path(@post, c), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+        <% end %>
+    <% end %>
+</div>
+
+<%= link_to "一覧に戻る", posts_path %>

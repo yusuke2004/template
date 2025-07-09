@@ -1,0 +1,16 @@
+<%= form_for @video do |f| %>
+    
+    <div class="field">
+        <%= f.label :動画 %>
+        <%= f.file_field :video %>
+    </div>
+
+    <div class="field">
+        <%= f.label :内容 %>
+        <%= f.text_field :body, :size => 30 %>
+    </div>
+
+    <%= f.submit "投稿する" %>
+<% end %>
+
+<%= link_to '← 戻る', request.referer || root_path %>

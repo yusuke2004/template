@@ -1,0 +1,4 @@
+posts メイン
+calculation 家計簿計算
+
+rails generate migration Addカラム名To加えたいテーブル名 カラム名:保存型

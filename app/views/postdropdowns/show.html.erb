@@ -1,0 +1,16 @@
+<h1>GeekTwitter</h1>
+<h3>postdropdown詳細</h3>
+
+<% if @postdropdown.dropdown.present? %>
+    <span><%= @postdropdown.dropdown.name %></span>
+<% else %>
+    <span>ジャンル未設定</span>
+<% end %>
+
+<div class="postdropdown">
+    <p><%= @postdropdown.title %></p>
+    <p><%= @postdropdown.body %></p>
+    <p><%= link_to "編集する", edit_postdropdown_path(@postdropdown.id) %></p>
+    <p><%= button_to "削除する", postdropdown_path(@postdropdown.id), method: :delete %></p>
+</div>
+<%= link_to "一覧に戻る", postdropdowns_path %>

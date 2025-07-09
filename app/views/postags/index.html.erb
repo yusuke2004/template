@@ -1,0 +1,29 @@
+<div class="posts-index">
+    <h1>タグ機能</h1>
+    <%= link_to "新規投稿へ", new_postag_path, class: "btn" %>
+
+    <%= form_tag({controller:"postags",action:"index"}, method: :get) do %>
+        <%= text_field_tag :tag %>
+        <%= submit_tag 'タグを追加' %>
+    <% end %>
+
+    <h3>複数タグの検索</h3>
+    <%= form_tag({controller:"postags",action:"index"}, method: :get) do %>
+        <% Tag.all.each do |t| %>
+            <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+        <% end %>
+        <%= submit_tag '検索' %>
+    <% end %>
+
+
+  <h3>投稿一覧</h3>
+  <div class="postags-container">
+    <% @postags.each do |t| %>
+      <div class="postag">
+        <%= t.name %>
+        <%= t.body %>
+        <%= link_to "詳細へ", postag_path(t.id) %>
+      </div>
+    <% end %>
+  </div>
+</div>

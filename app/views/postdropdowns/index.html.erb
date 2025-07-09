@@ -1,0 +1,26 @@
+<div class="posts-index">
+    <h1>プルダウン機能</h1>
+    <%= link_to "新規投稿へ", new_postdropdown_path, class: "btn" %>
+
+  <%= form_tag postdropdowns_path, method: :get, class: 'boards__searchForm' do %>
+    <%= select_tag :dropdown_id,
+        options_from_collection_for_select(Dropdown.all, :id, :name, params[:dropdown_id]),
+        {
+          prompt: 'ジャンルを絞る',
+          onchange: 'submit(this.form);'
+        }
+    %>
+  <% end %>
+
+
+  <h3>投稿一覧</h3>
+  <div class="postdropdowns-container">
+    <% @postdropdowns.each do |t| %>
+      <div class="postdropdown">
+        <%= t.title %>
+        <%= t.body %>
+        <%= link_to "詳細へ", postdropdown_path(t.id) %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<h2><%= @display_year %>年<%= @display_month %>月の家計簿</h2>
+
+<%= form_with url: calculations_path, method: :get, local: true do %>
+  年: <%= select_tag :year, options_for_select((2022..2026).to_a, @display_year) %>
+  月: <%= select_tag :month, options_for_select((1..12).to_a, @display_month) %>
+  <%= submit_tag "表示" %>
+<% end %>
+
+<p>収入: <%= @total_income %>円</p>
+<p>支出: <%= @total_expense %>円</p>
+<p>残高: <%= @balance %>円</p>
+
+<%= link_to "新規作成", new_calculation_path %>
+
+<% if @calculations.any? %>
+  <table>
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>金額</th>
+        <th>種別</th>
+        <th>カテゴリ</th>
+        <th>メモ</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @calculations.order(date: :asc).each do |t| %>
+        <tr>
+          <td><%= t.date.strftime("%Y-%m-%d") %></td>
+          <td><%= t.amount %>円</td>
+          <td><%= t.calculation_type == "income" ? "収入" : "支出" %></td>
+          <td><%= t.category&.name || "未分類" %></td>
+          <td><%= t.note %></td>
+          <td>
+            <%= link_to "編集", edit_calculation_path(t), class: "btn" %>
+            <%= button_to "削除", calculation_path(t), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>この月には記録がありません。</p>
+<% end %>
