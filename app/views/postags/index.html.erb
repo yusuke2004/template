@@ -20,7 +20,7 @@
   <div class="postags-container">
     <% @postags.each do |t| %>
       <div class="postag">
-        <%= t.name %>
+        <%= t.title %>
         <%= t.body %>
         <%= link_to "詳細へ", postag_path(t.id) %>
       </div>

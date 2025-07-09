@@ -6,7 +6,7 @@
 <% end %>
 
 <div class="postag">
-    <p><%= @postag.name %></p>
+    <p><%= @postag.title %></p>
     <p><%= @postag.body %></p>
     <p><%= link_to "編集する", edit_postag_path(@postag.id) %></p>
     <p><%= button_to "削除する", postag_path(@postag.id), method: :delete %></p>

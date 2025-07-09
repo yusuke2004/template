@@ -68,4 +68,4 @@ gem 'carrierwave'
 gem 'cloudinary' # 画像投稿
 gem 'activestorage-cloudinary-service' # 画像投稿
 
-gem 'pg'
+gem 'pg' # postgreSQL
