@@ -11,9 +11,6 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -51,7 +48,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
-    t.bigint "user_id", null: false
+    t.integer "user_id", null: false
     t.index ["user_id"], name: "index_calculations_on_user_id"
   end
 
@@ -63,8 +60,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
-    t.bigint "user_id", null: false
-    t.bigint "post_id", null: false
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -78,8 +75,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.bigint "post_id", null: false
-    t.bigint "user_id", null: false
+    t.integer "post_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_likes_on_post_id"
@@ -87,8 +84,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
   end
 
   create_table "postag_tag_relations", force: :cascade do |t|
-    t.bigint "postag_id", null: false
-    t.bigint "tag_id", null: false
+    t.integer "postag_id", null: false
+    t.integer "tag_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["postag_id"], name: "index_postag_tag_relations_on_postag_id"
@@ -105,7 +102,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_03_095806) do
   create_table "postdropdowns", force: :cascade do |t|
     t.text "body"
     t.string "title"
-    t.bigint "dropdown_id"
+    t.integer "dropdown_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["dropdown_id"], name: "index_postdropdowns_on_dropdown_id"
